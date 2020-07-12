@@ -118,5 +118,5 @@ if __name__ == "__main__":
                 VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) '''
     data = tuple([v for k, v in result.items()])
     log = db.insert_data(sql, data)
-    print(log)
+    print(data)
     pass
