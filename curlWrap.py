@@ -87,6 +87,7 @@ class Database():
         :param conn: the Connection object
         :return:
         """
+        self.session.row_factory = self.dict_factory
         cur = self.session.cursor()
         cur.execute(sql)
 
@@ -94,6 +95,12 @@ class Database():
 
         for row in rows:
             print(row)
+
+    def dict_factory(self, cursor, row):
+        d = {}
+        for idx, col in enumerate(cursor.description):
+            d[col[0]] = row[idx]
+        return d
 
 class CurlWrap():
 
@@ -138,6 +145,6 @@ if __name__ == "__main__":
             result['Local Port'], result['Content Type'], result['timestamp'],)
     log = db.insert_data(sql, data)
     #print(data)
-    query = 'SELECT * FROM curldata'
+    query = 'SELECT url, code, ip, totaltime, timestamp FROM curldata'
     db.query(query)
     pass
