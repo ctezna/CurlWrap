@@ -84,7 +84,7 @@ class Database():
 class CurlWrap():
 
     def build_curl(self, opts, urls):
-        curl_cmd = 'curl -w "\n&&curl_test_summa&&\nURL:: %{url_effective}\nIP:: %{remote_ip}\nPort:: %{remote_port}\n' + \
+        curl_cmd = 'curl -w "\n&&curl_test_389sk39&&\nURL:: %{url_effective}\nIP:: %{remote_ip}\nPort:: %{remote_port}\n' + \
         'Code:: %{response_code}\nSSL:: %{ssl_verify_result}\nTotal Time:: %{time_total}\n' + \
         'Time Lookup:: %{time_namelookup}\nDownload Size:: %{size_download}\n' + \
         'Header Size:: %{size_header}\nDownload Speed:: %{speed_download}\n' + \
@@ -96,7 +96,7 @@ class CurlWrap():
         return self.extract_curl_data(os.popen(self.build_curl(opts, urls)).read())
 
     def extract_curl_data(self, curl_result):
-        key = '&&curl_test_summa&&\n'
+        key = '&&curl_test_389sk39&&\n'
         data = curl_result[curl_result.find(key):].replace(key, '').split('\n')
         vals = [d.split('::')[1].strip() for d in data]
         keys = [d.split('::')[0].strip() for d in data]
