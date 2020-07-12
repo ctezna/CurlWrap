@@ -81,6 +81,20 @@ class Database():
         self.session.commit()
         return cur.lastrowid
 
+    def query(self, sql):
+        """
+        Query all rows in the tasks table
+        :param conn: the Connection object
+        :return:
+        """
+        cur = self.session.cursor()
+        cur.execute(sql)
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            print(row)
+
 class CurlWrap():
 
     def build_curl(self, opts, urls):
@@ -116,7 +130,14 @@ if __name__ == "__main__":
     sql = ''' INSERT INTO curldata(url,ip,port,code,ssl,totaltime,timedns,dlsize,headersize,\
                 dlspeed,numconn,numredir,localip,localport,contenttype,timestamp)
                 VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) '''
-    data = tuple([v for k, v in result.items()])
+    #data = tuple([v for k, v in result.items()])
+    data = (result['URL'], result['IP'], result['Port'], result['Code'], \
+            result['SSL'], result['Total Time'], result['Time Lookup'], \
+            result['Download Size'], result['Header Size'], result['Download Speed'], \
+            result['Number Connects'], result['Number Redirects'], result['Local IP'], \
+            result['Local Port'], result['Content Type'], result['timestamp'],)
     log = db.insert_data(sql, data)
-    print(data)
+    #print(data)
+    query = 'SELECT * FROM curldata WHERE url="http://www.fabysclean.com/"'
+    db.query(query)
     pass
