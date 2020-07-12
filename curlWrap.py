@@ -138,6 +138,6 @@ if __name__ == "__main__":
             result['Local Port'], result['Content Type'], result['timestamp'],)
     log = db.insert_data(sql, data)
     #print(data)
-    query = 'SELECT * FROM curldata WHERE url="http://www.fabysclean.com/"'
+    query = 'SELECT * FROM curldata'
     db.query(query)
     pass
