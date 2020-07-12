@@ -145,6 +145,6 @@ if __name__ == "__main__":
             result['Local Port'], result['Content Type'], result['timestamp'],)
     log = db.insert_data(sql, data)
     #print(data)
-    query = 'SELECT url, code, ip, totaltime, timestamp FROM curldata'
+    query = 'SELECT id, url, code, ip, totaltime, timestamp FROM curldata'
     db.query(query)
     pass
